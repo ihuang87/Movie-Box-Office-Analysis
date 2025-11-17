@@ -127,6 +127,9 @@ print(max(movies["Tickets.Sold"]), min(movies["Tickets.Sold"]), np.mean(movies["
 required_cols = ["Movie", "Tickets.Sold", "Year", "Distributor", "Genre", "MPAA", "Gross"]
 movie = movies.dropna(subset=required_cols).reset_index(drop=True)
 
+#remove duplicates if there are any
+movie = movies.drop_duplicates(inplace=True)
+
 # pick out frequent words and aggregate columns
 titles = movies["Movie"].fillna("").str.lower()
 
@@ -143,4 +146,9 @@ for w in top5:
     col = f"title_has_{w}"
     movies[col] = titles.str.contains(fr"\b{re.escape(w)}\b", regex=True).astype(int)
 
+# rename columns
+movies.rename(columns={'Tickets.Sold': 'tickets_sold'}, inplace=True)
+movies.rename(columns={'Release.Date': 'release_date'}, inplace=True)
 
+# write csv
+movies.to_csv('cleaned_movies.csv')
