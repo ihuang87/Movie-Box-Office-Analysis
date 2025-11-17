@@ -8,7 +8,7 @@ The repo is structured as:
 - data/cleaned_movies contains the cleaned dataset that was constructed.
 - model contains fitted models.
 - paper contains the files used to generate the paper, including the Quarto document as well as a PDF of the paper.
-- scripts contains the R scripts used to simulate, load and clean data.
+- scripts contains the Python scripts used to load and clean data.
 
 ## Statement on LLM usage
 
