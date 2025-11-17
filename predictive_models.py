@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OneshotEncoder
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score, mean_squared_error
@@ -13,57 +13,6 @@ from sklearn.neural_network import MLPRegressor
 
 # import data
 movies = pd.read_table("/Users/bellehuang/Downloads/STA4101/final_project/movies.txt")
-
-# glimpse data
-print(movies.head(10))
-
-numeric_cols = ["Gross", "Tickets.Sold", "Year", "Rank"]
-for c in numeric_cols:
-    if c in movies.columns:
-        movies[c] = pd.to_numeric(movies[c], errors="coerce")
-
-# parse dates
-if "Release.Date" in movies.columns:
-    movies["Release.Date"] = pd.to_datetime(movies["Release.Date"], errors="coerce")
-
-
-# 1) Top 10 movies by Gross
-top10 = movies.nlargest(10, "Gross")[["Movie", "Gross"]].iloc[::-1]  # reverse for horizontal plot order
-plt.figure()
-plt.barh(top10["Movie"], top10["Gross"])
-plt.title("Top 10 Movies by Domestic Gross")
-plt.xlabel("Gross (USD)")
-plt.tight_layout()
-plt.show()
-
-# 2) Total Gross by Genre
-if "Genre" in movies.columns:
-    gross_by_genre = movies.groupby("Genre", as_index=False)["Gross"].sum().sort_values("Gross", ascending=False)
-    plt.figure()
-    plt.bar(gross_by_genre["Genre"], gross_by_genre["Gross"])
-    plt.title("Total Domestic Gross by Genre")
-    plt.ylabel("Gross (USD)")
-    plt.xticks(rotation=45, ha="right")
-    plt.tight_layout()
-    plt.show()
-
-# 3) Tickets Sold vs Gross
-plt.figure()
-plt.scatter(movies["Tickets.Sold"], movies["Gross"])
-plt.title("Tickets Sold vs Gross")
-plt.xlabel("Tickets Sold")
-plt.ylabel("Gross (USD)")
-plt.tight_layout()
-plt.show()
-
-# 4) Distribution of Gross
-plt.figure()
-plt.hist(movies["Gross"].dropna(), bins=30)
-plt.title("Distribution of Domestic Gross")
-plt.xlabel("Gross (USD)")
-plt.ylabel("Count of Movies")
-plt.tight_layout()
-plt.show()
 
 ##  Fitting Models 
 
