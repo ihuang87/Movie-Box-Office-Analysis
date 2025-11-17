@@ -4,12 +4,11 @@ This analysis examines the movie box office using data on major movies released 
 ## File Structure
 
 The repo is structured as:
-
-    - data/movies contains the raw data as obtained from https://dasl.datadescription.com/datafile/movies_06-15/.
-    - data/cleaned_movies contains the cleaned dataset that was constructed.
-    - model contains fitted models.
-    - paper contains the files used to generate the paper, including the Quarto document as well as a PDF of the paper.
-    - scripts contains the R scripts used to simulate, load and clean data.
+- data/movies contains the raw data as obtained from https://dasl.datadescription.com/datafile/movies_06-15/.
+- data/cleaned_movies contains the cleaned dataset that was constructed.
+- model contains fitted models.
+- paper contains the files used to generate the paper, including the Quarto document as well as a PDF of the paper.
+- scripts contains the R scripts used to simulate, load and clean data.
 
 ## Statement on LLM usage
 
