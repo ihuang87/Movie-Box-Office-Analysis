@@ -1,12 +1,13 @@
 ---
-title: "Major Determinants of Box Office"
-subtitle: "Can we explain a movie's box office with minimal details provided?"
+title: "Explaining Box Office with Minimal Information"
+subtitle: "Can a Movie’s Success Be Explained with Only Basic Metadata?"
 author: 
   - Isabelle Huang
 
 date: today
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "Movie box office performance is a central topic in both industry and academic research, as it guides investment decisions, marketing strategies, and our understanding of audience behavior. We investigate to what extent simple movie attributes can explain box office outcomes. Using a dataset of 6897 films released between 2006 and 2015, we fit linear regression and shallow neural network models to predict tickets sold from only genre, distributor, MPAA rating, release timing, and a few title-based indicators. Even after tuning, our best linear model attains an $R^2$ of about 0.35 and the neural network does not substantially improve this, indicating that basic metadata alone are insufficient for accurate box office prediction and that richer information such as budget, marketing, franchise status, and word-of-mouth is likely essential."
+
 format: 
     pdf:
         toc: true
@@ -29,14 +30,13 @@ Although our models are not accurate enough to be useful for practical forecasti
 The remainder of this paper is structured as follows. Section 2 describes the dataset and the cleaning procedures. Section 3 presents our modelling approach and empirical results. Section 4 discusses the findings and limitations, and outlines directions for future work.
 
 
-
 # Data {#sec-data}
 
 ## Overview
 
-We use the statistical programming language R [@citeR].... Our data [@shelter].... Following @tellingstories, we consider...
+We use the statistical programming language Python [@citePython] together with the data library Pandas [@citePandas] to clean and analyze our dataset. The data come from the Data and Story Library (DASL), an open-source repository of real-world datasets for teaching and practice. Our dataset contains 6 897 major films released between 2006 and 2015, with variables including title, genre, distributor, MPAA rating, release date, and gross revenue. 
 
-Overview text
+
 
 ## Measurement
 	
