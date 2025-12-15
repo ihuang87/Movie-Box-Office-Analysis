@@ -279,15 +279,14 @@ $$
 \varepsilon_i \sim \mathcal{N}(0,\sigma^2),
 \qquad i=1,\dots,n.
 $$
-The parameters are estimated by ordinary least squares.
+The parameters are estimated by ordinary least squares. However, this model did not perform well, and only acheived an $R^2$ of about 0.35, therefore was not included in the main text.
 
 
 \subsection*{Lasso regression on log-transformed ticket sales}
 
 For the penalized model, we work with a log-transformed outcome
 $$Y_i = \log_{10}\bigl(\text{Tickets.Sold}_i\bigr)$$
-using the same underlying predictors (release year, release month,
-distributor, genre, MPAA rating, and title indicators).
+using the same underlying predictors.
 
 Let $\mathbf{x}_i \in \mathbb{R}^p$ denote the design vector for movie
 $i$ after preprocessing, where:
@@ -319,14 +318,7 @@ $$
 \right\},
 $$
 
-where $\lambda \ge 0$ is a tuning parameter controlling the strength of
-the $\ell_1$ penalty. The penalty is applied to the slope coefficients
-$\beta_j$ (the intercept is left unpenalised or absorbed by centering).
-In practice, we select $\lambda$ by $K$-fold cross-validation and use
-$\hat{\boldsymbol{\beta}}_{\hat{\lambda}}$ as the final model. The
-$\ell_1$ penalty both shrinks coefficients toward zero and sets many
-exactly to zero, performing variable selection and mitigating the impact
-of multicollinearity among the large set of dummy variables.
+We select $\lambda$ by $K$-fold cross-validation. This model was not presented since it slightly decreases the $R^2$ of our regression of log-transformed tickets sold.
 
 
 ## Diagnostics
