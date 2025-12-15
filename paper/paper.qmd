@@ -16,6 +16,7 @@ format:
 
 bibliography: references.bib
 ---
+
 \newpage
 # Introduction
 
@@ -189,17 +190,32 @@ Low Box Office Group Coefficients(Component 1):
 # Discussion
 
 ## Summary of analysis
-This report answers the question of how much of a movie’s box office performance can be explained using simplistic model and easily obtained data. We explored the dataset containing 6,897 major releases from 2006–2015, and based on the exploratory data analysis, we decided that a linear regression model would be be an appropriate simple model for modelling number of tickets sold. We modeled log-transformed ticket sales as a function of release year and month, distributor, genre, MPAA rating, and a small set of title indicators. After the first simple model, based on the observation that our response variable was bi-modal, we fit a two-component Gaussian mixture model to the log-tickets to identify the two potential underlying groups. Regression model was then fit to each compoenent to see whether relationships between predictors and outcomes differ in the low- and high-grossing segments and whether explanatory power of the model can be improved by grouping.
+This report investigates how much of movie box office performance can be explained using simple models and easily obtained data. We analyze a dataset of 6,897 major releases from 2006–2015. Based on exploratory analysis, we adopt linear regression to model ticket sales. Because ticket sales are extremely right-skewed, we model the log-transformed number of tickets sold as a function of release year and month, distributor, genre, MPAA rating, and a small set of title indicators.
 
-## key Findings
-We discovered that we are able to explain a moderate amount of variation in box office performance using only basic metadata. The linear regression on the log scale attains an $R^2$ of 0.68, which was non-trivial. It can be used as a proxy for understanding broad patterns in what movie attributes contribute to the its box office performance, when computation power is limited or precise outcomes were not required. Indeed, we were able to learn from our simple models that films released by large studio distributors and in commericial genres like advanture movies systematically sell more tickets than those from smaller distributors and narrower genres. People tend to favour movies that are relatively shallow, compared to genres like documentary and drama, which are associated with lower sales. This confirms the intuitive idea that institutional backing and genre positioning matter for commercial success, and the effect is visible even when we restrict attention to a small set of coarse variables. Although we initially believe that audience could be attracted to movies with certain key words in the title, our results show that these title indicators have minimal effects on ticket sales. So we are able to make some useful inferences about movie box office performance using only minimal information and simple models.
+Motivated by the bimodality of the log-transformed response, we also consider a mixture-based approach. We first fit a two-component Gaussian mixture model to the response to identify two latent groups. We then fit separate regression models within each component to assess whether explanatory power improves through grouping, and whether the relationships between predictors and outcomes differ between films with high ticket sales and those with low ticket sales.
 
-Moreover, the mixture analysis shows that the movie market can be effectively partitioned into at least two groups: a large group of low- to moderate-grossing films and a smaller group of high-grossing films. The two-component Gaussian mixture on fits substantially better than a single Normal distribution, with one component centered around a few thousand tickets and another around millions of tickets. When we fit separate regressions within these groups, we see that basic metadata are more informative among films that have high box office, compared to those with lower ticket sales. The high group regression has higher $R^2$ and cleaner, more stable effects for distributors and genres, while the low group shows weaker fits and more residual variability. This suggests that once a film reaches the commercial “upper tier”, its performance is more systematically tied to structural choices like genre and distribution, whereas performance in the lower tier is more idiosyncratic and less predictable from simple attributes. This also suggests that future work could build on mixture frameworks to better capture the characteristics of different movies, thereby better explaining and predicting box office outcomes.
+The models were then evaluated using in-sample $R^2$ and RMSE. Assumptions were also checked using residual diagnostics.
+
+## Key Findings
+
+From this analysis, we find that basic movie attributes can explain a moderate amount of variation in box office performance. Our linear regression achieves an $R^2$ of 0.68, which is non-trivial. This type of model can serve as a useful intermediate step for understanding broad patterns in how observable attributes relate to ticket sales, especially when computation or data-collection capacity is limited.
+
+The results suggest that films released by major studio distributors and belonging to commercially oriented genres, such as Adventure and Action, tend to sell more tickets than films from smaller distributors and narrower genres. In contrast, genres like Documentary and Drama which are less light-hearted are associated with lower sales. This aligns with the intuitive idea that institutional backing and genre positioning matter for commercial success and also that the audience tend to prefer something relaxing when heading to the theatres. Although we initially hypothesized that certain keywords in a title might attract audiences, the title-based indicators we tested have minimal association with ticket sales. Overall, with minimal information and simple models, we were able to generate several meaningful inference in relationship between basic movie attributes and box office performance.
+
+Moreover, the mixture analysis suggests that the movie market can be partitioned into at least two groups: a large group of films with low-to-moderate ticket sales and a smaller group of films with very high ticket sales. A two-component Gaussian mixture fits the log-ticket distribution noticeably better than a single Normal, with one component centered at much lower sales and the other corresponding to blockbuster-level outcomes.
+
+When we fit separate regressions within these groups, basic attributes appear more informative for high-performing films. The regression within the high-sales component achieves a higher $R^2$ and shows clearer, more stable associations for distributor and genre, whereas the low-sales component has weaker fit and greater residual variability. This is seems to suggest that once a film reaches an upper commercial tier, its performance is more systematically tied to structural factors such as distributor reach and genre positioning. In contrast, outcomes in the lower tier appear more idiosyncratic and less predictable from simple metadata. These results also point to mixture-based frameworks as a promising direction for future work, particularly if combined with additional covariates to better characterize the mechanisms that differentiate film types and drive box office outcomes.
 
 ## Limitations and future work
-However, it is important to recognize that there are several important limitations in our analysis. Substantively, the dataset is observational and restricted to major movies released from 2006 to 2015. This is ten years from now and trends in audience preference could change, the market could become more volatile and harder to explain with simple features and models. Being restricted to major movies would impact the generalization to smaller independent releases. Measurement could be imperfect in the dataset as assignments of genre and MPAA could be coarse and merging heterogeneous content. Methodologically, our models had issues in mutlicollinearity due to the large number of dummy variables for categorical predictors with many levels, which could lead to unstable coefficient estimates. Linearity assumption does not hold perfectly despite the transformation of the response variable, potentially leading to biased coefficients. We also did not consider interaction effects between predictors, due to the already existing multi-collinearity which we did not want to exacerbate. Finally, the mixture regressions rely on hard assignment of movies to latent components and do not carry mixture uncertainty into the regression stage, which could lead to unwanted bias.
+However, this analysis has several important limitations. From a data perspective, the dataset is observational and restricted to major releases from 2006–2015. As one decade has passed, audience preferences and industry structure may have great shifts since then. Patterns that were explainable with simple attributes in this period may not generalize to today’s market. In addition, focusing on major releases limits external validity for smaller independent films. Measurement error is also possible, for example, genre and MPAA categories can be coarse and may group heterogeneous content together.
 
-The analysis here is a first step rather than a complete model of box office performance. If we wish to continue down this path of using minimal information and simple models, we would need to develop methods that can better extract signals from limited data. This is an active researsch area and there are many potential directions. But if we just want to improve box office explanation and prediction more generally, richer data and more sophisticated models would be helpful. Future work can extend the feature set by incorporating production budgets, sequel and franchise indicators, star metrics, and measures of pre- and post-release attention such as critic scores, online ratings and social media activity. With richer covariates, it would be natural to compare regularised linear models, tree-based methods and hierarchical models that allow distributor and genre effects to vary across time or markets. On the mixture side, a more formal finite mixture of regressions—where both component membership and regression parameters are estimated jointly—would provide a principled framework for studying regime-specific relationships, at the cost of more complex computation. Finally, a deeper treatment of selection and measurement would clarify how much of the remaining unexplained variation is due to genuinely unobserved drivers versus noise in the observed data.
+Methodologically, our models face multicollinearity due to the large number of dummy variables created from multi-level categorical predictors, especially distributor and genre, which can make coefficient estimates unstable. Although the log transformation improves model behavior, the linearity assumption is still only approximate, so some coefficient bias is possible. We also did not consider interaction effects in attempts to avoid further inflating collinearity, even though interactions may be important.
+
+Finally, our mixture-regression uses hard assignment of films to mixture components and then fits regressions conditional on those assignments. This two-stage approach does not propagate uncertainty from the mixture step into the regression stage, which can understate uncertainty in component-specific results.
+
+This analysis should be viewed as a first step rather than a complete model of box office performance. If we want to continue pursue the path of simple models and minimal predictors, a natural next step is to develop methods that better extract signal from limited data. This is an active research area, with many possible directions that could improve performance in our setting.
+
+However, if the goal is stronger explanation and prediction more broadly, richer data and more flexible models will likely be helpful. Future work could expand the feature set to include production budgets, sequel and franchise indicators, star metrics, and measures of pre- and post-release attention such as critic scores, online ratings, and social media activity. With these covariates, it would be useful to compare regular linear models, tree-based methods, and hierarchical models that allow distributor and genre effects to vary across time or markets. On the mixture side, a finite mixture of regressions fit jointly-estimating both component membership and regression parameters—could provide a principled framework for studying group-specific relationships.
 
 \newpage
 
@@ -224,9 +240,7 @@ On top of the two models considered in the main text, we also consider the follo
 
 Let $i = 1,\dots,n$ index movies and define the outcome as the number of
 tickets sold,
-$$
-Y_i = \text{Tickets.Sold}_i.
-$$
+$Y_i$ = the number of tickets sold for movie $i$.
 For each movie $i$, we observe:
 
 \begin{itemize}
@@ -240,8 +254,9 @@ For each movie $i$, we observe:
         ``man'', ``love'', or ``life''.
 \end{itemize}
 
-We treat $G_i$, $D_i$, and $M_i$ as categorical variables and represent
-them with dummy variables. The linear regression model on the original
+$G_i$, $D_i$, and $M_i$ are categorical variables represented with dummy variables.
+ 
+The linear regression model on the original
 ticket scale is
 \begin{align*}
 Y_i
@@ -264,20 +279,12 @@ $$
 \varepsilon_i \sim \mathcal{N}(0,\sigma^2),
 \qquad i=1,\dots,n.
 $$
-The parameter vector
-$(\beta_0, \beta_{\text{year}}, \beta_{\text{month}},
- \{\gamma_g\}_g,\{\delta_d\}_d,\{\eta_m\}_m,
- \alpha_{\text{man}},\alpha_{\text{love}},\alpha_{\text{life}})$
-is estimated by ordinary least squares, i.e.\ by minimizing the sum of
-squared residuals
-$$
-\sum_{i=1}^n \bigl(Y_i - \hat{Y}_i\bigr)^2.
-$$
+The parameters are estimated by ordinary least squares.
 
 
 \subsection*{Lasso regression on log-transformed ticket sales}
 
-For the penalised model, we work with a log-transformed outcome
+For the penalized model, we work with a log-transformed outcome
 $$Y_i = \log_{10}\bigl(\text{Tickets.Sold}_i\bigr)$$
 using the same underlying predictors (release year, release month,
 distributor, genre, MPAA rating, and title indicators).
