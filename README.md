@@ -6,7 +6,7 @@ Movie box office performance is an important topic in both industry and academic
 The repo is structured as:
 - data/movies contains the raw data as obtained from https://dasl.datadescription.com/datafile/movies_06-15/.
 - data/cleaned_movies contains the cleaned dataset that was constructed.
-- model contains the three models fitted in this analysis, including linear regression, mixture model regression and a lasso regression.Outputs from each models and Diagnostics plots are also included.
+- model contains the three models fitted in this analysis, including linear regression, mixture model regression and a lasso regression outputs from each models and Diagnostics plots are also included.
 - paper contains the files used to generate the paper, including the Quarto document, the PDF generated from Quarto, and the bibliography file.
 - scripts contains the Python scripts used to load and clean the raw data. Tests for the data were also included.
 
