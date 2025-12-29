@@ -1,5 +1,5 @@
 ---
-title: "Explaining Box Office Success(2006-2015)"
+title: "Explaining Box Office Success (2006-2015)"
 subtitle: "Can a Movie’s Ticket Sales Be Explained by Basic Metadata?"
 author: 
   - Isabelle Huang
@@ -209,7 +209,7 @@ Low Box Office Group Coefficients(Component 1):
 | ---------------- | -------- | --------- | --------|
 | Distributor = 20th Century Fox |0.6007  |   0.707  |      0.396|
 | Genre =  Adventure | 0.1209 | 0.101 | 0.232  |
-| MPAA = Not Rated |-0.3786  | 0.120  |-  0.002|
+| MPAA = Not Rated |-0.3786  | 0.120  |-0.002|
 | Distributor = Walt Disney |0.5205 | 0.705 | 0.460|
 | Genre = Drama | 0.1609  |  0.066   |   0.015|
 
